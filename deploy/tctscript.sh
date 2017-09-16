@@ -36,8 +36,6 @@ cp tctnoded "$2"
 cp node.ini "$2"
 cp bans.dat "$2"
 cp peers.dat "$2"
-cd "$2"
-zip -r  tct.zip *
-cd ~
+zip -r  "$2/tct.zip" *
 yes "" | ./sha3 --test-file="$2/tct.zip" >  "$2/check.sum"
 echo "Done!"
