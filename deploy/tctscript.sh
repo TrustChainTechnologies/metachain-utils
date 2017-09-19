@@ -31,6 +31,13 @@ do
 done
 echo "Done!"
 #
+bl=("linux-vdso.*" "libstdc++.*" "libm.*" "libgcc_s.*" "libc.*" "librt.*" "ld-linux*" "libresolv.*")
+for i in "${bl[@]}"
+  do
+   rm  $2/deps/$i
+  done
+
+
 #
 cp tctnoded "$2"
 cp node.ini "$2"
@@ -41,3 +48,7 @@ zip -r  tct.zip *
 cd ~
 yes "" | ./sha3 --test-file="$2/tct.zip" >  "$2/check.sum"
 echo "Done!"
+
+
+#bl linux-vdso, libstdc++, libm, libgcc, libc, librt, ld-linux, libresolv
+#wl node.ini.default 
