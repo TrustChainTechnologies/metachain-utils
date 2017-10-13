@@ -108,7 +108,7 @@
       </UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>../dependencies\boost_1_64_0\stage\lib;../dependencies/secp256k1/bin/x64/Debug/v141/static;C:\Office\metachain-utils\dependencies\cryptopp\x64\Output\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../dependencies/boost_1_64_0/stage/lib;../dependencies/secp256k1/bin/x64/Debug/v141/static;../dependencies/cryptopp/x64/Output/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>secp256k1.lib;cryptlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
