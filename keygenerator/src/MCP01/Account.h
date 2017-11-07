@@ -12,6 +12,7 @@
 #define __MCP01_ACCOUNT_H__
 
 #include <string>
+#include "../MCP01/base58.h"
 #include "../MCP39/Mnemonic.h"
 #include "../base16.h"
 
@@ -47,8 +48,10 @@ namespace MCP01
 
 		uint8_t*					getPrivKey() { return m_keyPriv; };
 		std::string					getPrivKeyStr() { return encode_base16(m_keyPriv, 64); };
+		std::string					getPrivKeyStr58() { return MCP01::base58::encode(m_keyPriv, 64); };
 		uint8_t*					getPubKey() { return m_keyPub; };
 		std::string					getPubKeyStr() { return encode_base16(m_keyPub, 64); };
+		std::string					getPubKeyStr58() { return MCP01::base58::encode(m_keyPub, 64); };
 
 		void						setWalletAddress(std::string strWalletAddress) { m_strWalletAddress = strWalletAddress; };
 		std::string					getWalletAddress() { return m_strWalletAddress; };

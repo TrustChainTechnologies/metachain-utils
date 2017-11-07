@@ -119,7 +119,8 @@ int main(int argc, char* argv[])
 
 	// Private Key
 	MCP01::Account acc(mnem.decode(words, strPassphrase));
-	LOGS("Private key: " + acc.getPrivKeyStr() );
+	LOG("Private key: " + acc.getPrivKeyStr(), "base16" );
+	LOG("Private key: " + acc.getPrivKeyStr58(), "base58");
 
 	// Public Key
 	if (!acc.calcPubKey(MCP01::Account::ECDSA::SECP256k1))
@@ -128,7 +129,8 @@ int main(int argc, char* argv[])
 		getchar();
 		return 1;
 	}
-	LOG("The public key is: " + acc.getPubKeyStr(), "SECP256K1");
+	LOG("The public key is: " + acc.getPubKeyStr(), "SECP256K1 - base16");
+	LOG("The public key is: " + acc.getPubKeyStr58(), "SECP256K1 - base58");
 
 	// Wallet Address
 	LOGS("The wallet address is (Mainnet | SECP256k1): " + acc.getWalletAddress(GetArg("-c", "MC")));
