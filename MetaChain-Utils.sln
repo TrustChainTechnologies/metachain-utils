@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "keygenerator", "keygenerator\keygenerator.vcxproj", "{A9280033-57E7-412C-AE1F-28EADEA0D1F0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sha3_test", "sha3_test\sha3_test.vcxproj", "{EE7B8F54-EFA5-47E8-985C-26C84CC74550}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pubKeyFinder", "pubKeyFinder\pubKeyFinder.vcxproj", "{26EEF4CD-A5AD-49BB-A583-803E7C1C09D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,14 @@ Global
 		{EE7B8F54-EFA5-47E8-985C-26C84CC74550}.Release|x64.ActiveCfg = Release|x64
 		{EE7B8F54-EFA5-47E8-985C-26C84CC74550}.Release|x86.ActiveCfg = Release|Win32
 		{EE7B8F54-EFA5-47E8-985C-26C84CC74550}.Release|x86.Build.0 = Release|Win32
+		{26EEF4CD-A5AD-49BB-A583-803E7C1C09D9}.Debug|x64.ActiveCfg = Debug|x64
+		{26EEF4CD-A5AD-49BB-A583-803E7C1C09D9}.Debug|x64.Build.0 = Debug|x64
+		{26EEF4CD-A5AD-49BB-A583-803E7C1C09D9}.Debug|x86.ActiveCfg = Debug|Win32
+		{26EEF4CD-A5AD-49BB-A583-803E7C1C09D9}.Debug|x86.Build.0 = Debug|Win32
+		{26EEF4CD-A5AD-49BB-A583-803E7C1C09D9}.Release|x64.ActiveCfg = Release|x64
+		{26EEF4CD-A5AD-49BB-A583-803E7C1C09D9}.Release|x64.Build.0 = Release|x64
+		{26EEF4CD-A5AD-49BB-A583-803E7C1C09D9}.Release|x86.ActiveCfg = Release|Win32
+		{26EEF4CD-A5AD-49BB-A583-803E7C1C09D9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

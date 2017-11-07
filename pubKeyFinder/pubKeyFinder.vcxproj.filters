@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Ressourcendateien">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Quelldateien\MCP01">
+      <UniqueIdentifier>{892ea069-b7f6-4b46-9eaf-94e837f89e17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\MCP39">
+      <UniqueIdentifier>{fd8356b6-7c3f-4683-ad67-c829b9d15391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\MCP01">
+      <UniqueIdentifier>{abb2f287-570d-4767-b63c-ae9fc46b9630}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\MCP39">
+      <UniqueIdentifier>{9933c0bc-3d1e-4aaf-a139-6c77ce817c5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\secp256k1">
+      <UniqueIdentifier>{22bda0ed-7ec9-4a40-bb90-317a87112679}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pubKeyFinder.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="..\keygenerator\src\MCP01\Account.cpp">
+      <Filter>Quelldateien\MCP01</Filter>
+    </ClCompile>
+    <ClCompile Include="..\keygenerator\src\MCP01\base58.cpp">
+      <Filter>Quelldateien\MCP01</Filter>
+    </ClCompile>
+    <ClCompile Include="..\keygenerator\src\MCP39\dictionairy.cpp">
+      <Filter>Quelldateien\MCP39</Filter>
+    </ClCompile>
+    <ClCompile Include="..\keygenerator\src\MCP39\Mnemonic.cpp">
+      <Filter>Quelldateien\MCP39</Filter>
+    </ClCompile>
+    <ClCompile Include="..\keygenerator\src\base16.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\ArgsManager.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\logger.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\utilstrencodings.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sha3_test\src\sha3.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\keygenerator\src\MCP01\Account.h">
+      <Filter>Headerdateien\MCP01</Filter>
+    </ClInclude>
+    <ClInclude Include="..\keygenerator\src\MCP01\base58.h">
+      <Filter>Headerdateien\MCP01</Filter>
+    </ClInclude>
+    <ClInclude Include="..\keygenerator\src\MCP39\dictionairy.h">
+      <Filter>Headerdateien\MCP39</Filter>
+    </ClInclude>
+    <ClInclude Include="..\keygenerator\src\MCP39\Mnemonic.h">
+      <Filter>Headerdateien\MCP39</Filter>
+    </ClInclude>
+    <ClInclude Include="..\keygenerator\src\array_slice.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\keygenerator\src\base16.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\ArgsManager.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\logger.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\tinyformat.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\utilstrencodings.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\dependencies\secp256k1\include\secp256k1.h">
+      <Filter>Headerdateien\secp256k1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\dependencies\secp256k1\include\secp256k1_ecdh.h">
+      <Filter>Headerdateien\secp256k1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\dependencies\secp256k1\include\secp256k1_recovery.h">
+      <Filter>Headerdateien\secp256k1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sha3_test\src\sha3.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
