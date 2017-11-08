@@ -5,6 +5,7 @@
 **********************************************************************/
 
 #include "sha3.h"
+#include <memory>
 #include <iomanip>
 #include <boost/lexical_cast.hpp>
 #include "endian.h"
@@ -33,12 +34,19 @@ static inline uint64_t rotateRight(uint64_t x, int n)
 }
 
 SHA3::SHA3()
-	:m_pEncBuf(NULL)
+	:m_pEncBuf(nullptr),
+	m_pDigest(nullptr)
 {
 }
 
 SHA3::~SHA3()
 {
+	if (m_pDigest)
+		delete m_pDigest;
+	if (m_keccakState.A)
+		delete m_keccakState.A;
+	if (m_keccakState.buffer)
+		delete m_keccakState.buffer;
 	if (m_pEncBuf)
 		delete m_pEncBuf;
 }
@@ -103,21 +111,19 @@ uint8_t* SHA3::hash(HashType type, HashSize size, const uint8_t * pBuffer, unsig
 	
 	keccakUpdate(pBuffer, 0, uiLength);
 		
-	uint8_t *op;
 	switch (type)
 	{
-	case SHA3::HashType::DEFAULT:
-		op = sha3Digest();
-		break;
 	case SHA3::HashType::KECCAK:
-		op = keccakDigest();
+		return keccakDigest();
 		break;
 	case SHA3::HashType::SHAKE:
-		op = shakeDigest();
+		return shakeDigest();
+		break;
+	case SHA3::HashType::DEFAULT:
+	default:
+		return sha3Digest();
 		break;
 	}
-
-	return op;
 }
 
 uint8_t* SHA3::cShake(HashSize size, const uint8_t *pBuffer, unsigned int uiLength, unsigned int uiDigestLength, std::string strFunctionName, std::string strCustomization)
@@ -160,26 +166,26 @@ uint8_t* SHA3::kmac(HashSize size, const uint8_t *pBuffer, unsigned int uiLength
 {
 	unsigned int uiBlockSize = 200 - 2 * (size / 8);
 	unsigned int uiBufferSize = (strKey.length() == 0 ? 1 : ceil((float)strKey.length() / uiBlockSize))*uiBlockSize + uiLength + sizeof(size_t) + 1;
-	m_pEncBuf = new unsigned char[uiBufferSize];
-	memset(m_pEncBuf, 0x00, uiBufferSize);
+	std::unique_ptr<unsigned char> pNewBuffer (new unsigned char[uiBufferSize]);
+	memset(pNewBuffer.get(), 0x00, uiBufferSize);
 	unsigned int uiBytesWritten = 0;
 
 	// the key
 	unsigned char *pPtr = encode_string((unsigned char*)strKey.c_str(), strKey.length(), &uiBytesWritten);
-	memcpy(m_pEncBuf, pPtr, uiBytesWritten);
+	memcpy(pNewBuffer.get(), pPtr, uiBytesWritten);
 	delete pPtr;
 
 	// the content
 	unsigned int uiOffset = (strKey.length() == 0 ? 1 : ceil(strKey.length() / uiBlockSize))*uiBlockSize; //bytepad
-	memcpy((m_pEncBuf + uiOffset), pBuffer, uiLength);
+	memcpy((pNewBuffer.get() + uiOffset), pBuffer, uiLength);
 	uiOffset += uiLength;
 	
 	// the digest length
-	uiBytesWritten = right_encode( (m_pEncBuf +uiOffset), uiDigestLength);
+	uiBytesWritten = right_encode( (pNewBuffer.get()+uiOffset), uiDigestLength);
 	uiOffset += uiBytesWritten;
 
 	//cshake
-	return cShake(size, m_pEncBuf, uiOffset, uiDigestLength, "KMAC", strCustomization);
+	return cShake(size, pNewBuffer.get(), uiOffset, uiDigestLength, "KMAC", strCustomization);
 }
 
 // Function to create the state structure for keccak application, of size length
@@ -285,13 +291,17 @@ unsigned char *SHA3::sha3Digest()
 	uint64_t *A = m_keccakState.A;
 	sha3AddPadding();
 	keccakProcessBuffer();
-	uint64_t *tmp = new uint64_t[m_keccakState.length];
+
+	if (m_pDigest)
+		delete m_pDigest;
+
+	m_pDigest = new uint64_t[m_keccakState.length];
 	for (int i = 0; i < m_keccakState.length; i += 8)
 	{
-		tmp[i >> 3] = htole64(A[i >> 3]);
+		m_pDigest[i >> 3] = htole64(A[i >> 3]);
 	}
 	keccakReset();
-	return (unsigned char*)tmp;
+	return (unsigned char*)m_pDigest;
 }
 
 // keccakDigest - called once all data has been few to the keccakUpdate functions
@@ -302,13 +312,17 @@ unsigned char *SHA3::keccakDigest()
 	uint64_t *A = m_keccakState.A;
 	keccakAddPadding();
 	keccakProcessBuffer();
-	uint64_t *tmp = new uint64_t[m_keccakState.length];
+	
+	if (m_pDigest)
+		delete m_pDigest;
+
+	m_pDigest = new uint64_t[m_keccakState.length];
 	for (unsigned int i = 0; i < m_keccakState.length; i += 8)
 	{
-		tmp[i >> 3] = htole64(A[i >> 3]);
+		m_pDigest[i >> 3] = htole64(A[i >> 3]);
 	}
 	keccakReset();
-	return (unsigned char*)tmp;
+	return (unsigned char*)m_pDigest;
 }
 
 // shakeDigest - called once all data has been few to the keccakUpdate functions
@@ -319,13 +333,17 @@ unsigned char *SHA3::shakeDigest()
 	uint64_t *A = m_keccakState.A;
 	shakeAddPadding();
 	keccakProcessBuffer();
-	uint64_t *tmp = new uint64_t[m_keccakState.d];
+
+	if (m_pDigest)
+		delete m_pDigest;
+
+	m_pDigest = new uint64_t[m_keccakState.d];
 	for (unsigned int i = 0; i < m_keccakState.d; i += 8)
 	{
-		tmp[i >> 3] = htole64(A[i >> 3]);
+		m_pDigest[i >> 3] = htole64(A[i >> 3]);
 	}
 	keccakReset();
-	return (unsigned char*)tmp;
+	return (unsigned char*)m_pDigest;
 }
 
 
