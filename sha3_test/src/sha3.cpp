@@ -85,21 +85,19 @@ uint8_t* SHA3::hashFile(std::string strFileName, HashType type, HashSize size, u
 	delete[] cBuffer;
 	fclose(fp);
 
-	uint8_t *op;
 	switch (type)
 	{
-	case SHA3::HashType::DEFAULT:
-		op = sha3Digest();
-		break;
 	case SHA3::HashType::KECCAK:
-		op = keccakDigest();
+		return keccakDigest();
 		break;
 	case SHA3::HashType::SHAKE:
-		op = shakeDigest();
+		return shakeDigest();
+		break;
+	case SHA3::HashType::DEFAULT:
+	default:
+		return sha3Digest();
 		break;
 	}
-
-	return op;
 }
 
 uint8_t* SHA3::hash(HashType type, HashSize size, const uint8_t * pBuffer, unsigned int uiLength, unsigned int uiDigestLength )
