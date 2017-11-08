@@ -92,6 +92,9 @@ int main(int argc, char* argv[])
 
 	LOGS("Using Language: " + strLanguage);
 
+	std::string strPassphrase = GetArg("-p", "");
+	LOGS("Using Passphrase: " + strPassphrase);
+
 	std::string strFront = GetArg("-f", "");
 	if (strFront == "")
 	{
@@ -113,9 +116,7 @@ int main(int argc, char* argv[])
 		getchar();
 		return 1;
 	}
-
-	std::string strPassphrase = GetArg("-p", "");
-	LOGS("Using Passphrase: " + strPassphrase);
+	LOGS("Looking for a Public Key that starts with: " + strFront);
 		
 	const auto dictionary = dictLanguage.front();
 	MCP39::Mnemonic mnem;
@@ -123,7 +124,7 @@ int main(int argc, char* argv[])
 	std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
 	std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
 	unsigned int uiCount = 0;
-	while(++uiCount)
+	while (++uiCount)
 	{
 		std::string strSeed = getRandomSeed(64);
 #ifdef _DEBUG
@@ -151,10 +152,9 @@ int main(int argc, char* argv[])
 
 		if (acc.getPubKeyStr58().compare(0, uiWishLength, strFront) == 0)
 		{
-			continue;
 			LOGS("=============================");
 			LOGS("    !!!! FOUND ONE !!!!");
-			LOGS("It took " + std::to_string(std::chrono::duration_cast<std::chrono::seconds>(t1 - t2).count()) + " seconds to find this pub key. Enjoy :)");
+			LOGS("It took " + std::to_string(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::high_resolution_clock::now() - t2).count()) + " seconds to find this pub key. Enjoy :)");
 			LOGS("=============================");
 
 			LOGS("Using Seed: " + strSeed);
@@ -177,6 +177,5 @@ int main(int argc, char* argv[])
 			getchar();
 			return 1;
 		}
-
 	}
 }
