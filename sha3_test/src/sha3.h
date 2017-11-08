@@ -42,7 +42,7 @@ private:
 
 	keccakState								m_keccakState;
 	unsigned char							*m_pEncBuf;
-	uint64_t									*m_pDigest;
+	uint64_t								*m_pDigest;
 
 	void									keccakCreate(int length);
 	void									shakeCreate(int length, unsigned int d_);
