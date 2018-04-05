@@ -1,13 +1,13 @@
-# TrustChainTechnologies - MetaChain-Utils
+# MetaChain - Utils
 
-[![TrustChainTechnologies](https://www.trustchaintechnologies.io/logo.png)](https://www.trustchaintechnologies.io/)
+<img align="left" width="100" height="100" src="https://aequator.io/AEC_Logo_Final_RGB.svg">
 
 This is a collaborative set of utils, programs and functions that use the MetaChain or support it in any kind of way.
 
 ### Development
 
 You want to contribute? Have the guts to tackle crypto development?
-Perfect, then register in our [forum] and get in touch with us!
+Perfect, get in touch with us!
 
 # Installation
 
@@ -32,9 +32,8 @@ License
 GPLv3
 
 
-**(c) the TCT-Devs**
+**(c) the MC-Devs**
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
-   [forum]: <https://forum.trustchaintechnologies.io>
    [boost]: <http://www.boost.org/>
